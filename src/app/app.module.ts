@@ -5,24 +5,58 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
 import { BlogListComponent } from './components/blog-list/blog-list.component';
-import { BlogDetailComponent } from './components/blog-detail/blog-detail.component';
 import { LikeComponent } from './components/like/like.component';
-import { UserProfileComponent } from './components/user-profile/user-profile.component';
+import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
+import { AuthInterceptor } from './interceptors/auth.interceptor';
+import { ReactiveFormsModule } from '@angular/forms';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatInputModule } from '@angular/material/input';
+import { MatButtonModule } from '@angular/material/button';
+import { CommentComponent } from './components/comment/comment.component';
+import { NavbarComponent } from './components/navbar/navbar.component';
+import { HomeComponent } from './pages/home/home.component';
+import { MatToolbarModule } from '@angular/material/toolbar';
+import { MatIconModule } from '@angular/material/icon';
+import { MatMenuModule } from '@angular/material/menu';
+import { LoginComponent } from './pages/login/login.component';
+import { SidebarComponent } from './components/sidebar/sidebar.component';
+import { MatListModule } from '@angular/material/list';
+import { MatCardModule } from '@angular/material/card';
+import { BlogDetailComponent } from './pages/blog-detail/blog-detail.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     BlogListComponent,
-    BlogDetailComponent,
     LikeComponent,
-    UserProfileComponent
+    CommentComponent,
+    HomeComponent,
+    NavbarComponent,
+    LoginComponent,
+    SidebarComponent,
+    BlogDetailComponent,
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule
+    AppRoutingModule,
+    HttpClientModule,
+    ReactiveFormsModule,
+    MatFormFieldModule,
+    MatInputModule,
+    MatButtonModule,
+    MatToolbarModule,
+    MatIconModule,
+    MatMenuModule,
+    MatListModule,
+    MatCardModule,
   ],
   providers: [
-    provideAnimationsAsync()
+    provideAnimationsAsync(),
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: AuthInterceptor,
+      multi: true,
+    }
   ],
   bootstrap: [AppComponent]
 })

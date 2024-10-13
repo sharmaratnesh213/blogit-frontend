@@ -1,0 +1,15 @@
+<div>
+  <h3>Comments</h3>
+
+  <form [formGroup]="commentForm" (ngSubmit)="onSubmit()">
+    <mat-form-field appearance="fill">
+      <mat-label>Comment</mat-label>
+      <textarea matInput formControlName="content"></textarea>
+    </mat-form-field>
+    <button mat-raised-button color="primary" type="submit">Add Comment</button>
+  </form>
+
+  <div *ngFor="let comment of comments">
+    <p>{{ comment.content }}</p>
+  </div>
+</div>

@@ -1,1 +1,17 @@
-<p>blog-list works!</p>
+<div class="blog-list-container">
+  <div *ngFor="let blog of blogs" class="blog-card">
+    <mat-card (click)="navigateToDetail(blog.id)" class="blog-card-content">
+      <img mat-card-image [src]="blog.imageUrl" alt="{{ blog.title }}" />
+      <mat-card-header>
+        <mat-card-title>{{ blog.title }}</mat-card-title>
+        <mat-card-subtitle>{{ blog.user?.username }}</mat-card-subtitle>
+        <mat-card-subtitle>{{
+          blog.creationDateTime | date
+        }}</mat-card-subtitle>
+      </mat-card-header>
+      <mat-card-content>
+        <p>{{ blog.content | slice : 0 : 100 }}...</p>
+      </mat-card-content>
+    </mat-card>
+  </div>
+</div>

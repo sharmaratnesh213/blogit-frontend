@@ -24,8 +24,8 @@ export class CommentService {
     return this.http.get<Comment[]>(`${this.apiUrl}/user/${userId}`);
   }
 
-  createComment(comment: Comment): Observable<Comment> {
-    return this.http.post<Comment>(`${this.apiUrl}/create`, comment);
+  addComment(comment: Comment): Observable<Comment> {
+    return this.http.post<Comment>(`${this.apiUrl}/add`, comment);
   }
 
   updateComment(comment: Comment): Observable<Comment> {

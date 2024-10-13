@@ -1,0 +1,19 @@
+<mat-toolbar color="primary">
+  <span class="logo">Blogit</span>
+  <span class="spacer"></span>
+
+  <button mat-button routerLink="/">Home</button>
+  <button mat-button routerLink="/blogs">Blogs</button>
+  <button mat-button routerLink="/about">About</button>
+  <button mat-button routerLink="/contact">Contact</button>
+
+  <span class="spacer"></span>
+
+  <button mat-icon-button aria-label="User Account" [matMenuTriggerFor]="menu">
+    <mat-icon>account_circle</mat-icon>
+  </button>
+  <mat-menu #menu="matMenu">
+    <button mat-menu-item routerLink="/profile">Profile</button>
+    <!-- <button mat-menu-item (click)="logout()">Logout</button> -->
+  </mat-menu>
+</mat-toolbar>
