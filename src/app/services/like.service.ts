@@ -12,12 +12,12 @@ export class LikeService {
 
   constructor(private http: HttpClient) { }
 
-  likeBlog(userId: number, blogId: number): Observable<any> {
-    return this.http.post<any>(`${this.apiUrl}/like/${userId}/${blogId}`, null);
+  likeBlog(blogId: number): Observable<any> {
+    return this.http.post<any>(`${this.apiUrl}/like/blog/${blogId}`, null, { responseType: 'text' as 'json' });
   }
 
-  unlikeBlog(userId: number, blogId: number): Observable<any> {
-    return this.http.delete<any>(`${this.apiUrl}/unlike/${userId}/${blogId}`);
+  unlikeBlog(blogId: number): Observable<any> {
+    return this.http.delete<any>(`${this.apiUrl}/unlike/blog/${blogId}`, { responseType: 'text' as 'json' });
   }
 
   hasUserLikedBlog(userId: number, blogId: number): Observable<boolean> {

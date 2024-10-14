@@ -5,6 +5,10 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { BlogService } from '../../services/blog.service';
 import { CommentService } from '../../services/comment.service';
 import { AuthService } from '../../services/auth.service';
+import { MatDialog } from '@angular/material/dialog';
+import { EditBlogComponent } from '../../components/edit-blog/edit-blog.component';
+import { LikeService } from '../../services/like.service';
+import { User } from '../../models/user';
 
 @Component({
   selector: 'app-blog-detail',
@@ -17,17 +21,22 @@ export class BlogDetailComponent implements OnInit {
   blogId!: number;
   comments: Comment[] = [];
   isAuthor: boolean = false;
+  loggedInUser!: User | null;
+  isLiked!: boolean;
 
   constructor(
     private route: ActivatedRoute,
     private blogService: BlogService,
     private commentService: CommentService,
     private authService: AuthService,
-    private router: Router
+    private likeService: LikeService,
+    private router: Router,
+    private dialog: MatDialog,
   ) { }
 
   ngOnInit(): void {
     this.blogId = Number(this.route.snapshot.paramMap.get('id'));
+    this.loggedInUser = this.authService.getUser();
     this.loadBlogDetails();
     this.loadComments();
   }
@@ -36,6 +45,7 @@ export class BlogDetailComponent implements OnInit {
     this.blogService.getBlogById(this.blogId).subscribe((data: Blog) => {
       this.blog = data;
       this.checkIfAuthor();
+      this.hasUserLikedBlog();
     });
   }
 
@@ -52,8 +62,54 @@ export class BlogDetailComponent implements OnInit {
     }
   }
 
+  hasUserLikedBlog(): void {
+    this.likeService.hasUserLikedBlog(this.loggedInUser?.id!, this.blog?.id!).subscribe((data: boolean) => {
+      this.isLiked = data;
+    });
+  }
+
+  likeBlog(): void {
+    if(this.blog){
+      this.likeService.likeBlog(this.blog.id!).subscribe({
+        next: (response: string) => {
+          this.isLiked = true;
+          this.loadBlogDetails();
+        },
+        error: (error) => {
+          console.error('Error liking blog:', error);
+        }
+      });
+    }
+  }
+
+  unlikeBlog(): void {
+    if(this.blog){
+      this.likeService.unlikeBlog(this.blog.id!).subscribe({
+        next: (response: string) => {
+          this.isLiked = false;
+          this.loadBlogDetails();
+        },
+        error: (error) => {
+          console.error('Error unliking blog:', error);
+        }
+      });
+    }
+  }
+
   editBlog(): void {
-    this.router.navigate(['/blog/edit', this.blogId]);
+    const dialogRef = this.dialog.open(EditBlogComponent, {
+      data: this.blog,
+      width: '500px'
+    });
+
+    dialogRef.afterClosed().subscribe({
+      next: () => {
+        this.loadBlogDetails();
+      },
+      error: (error) => {
+        console.error('Error updating blog:', error);
+      }
+    });
   }
 
   deleteBlog(): void {

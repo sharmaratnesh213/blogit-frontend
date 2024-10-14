@@ -19,7 +19,11 @@
   <div class="categories">
     <h1>Categories</h1>
     <mat-list class="cat-list">
-      <mat-list-item *ngFor="let category of categories" class="cat-list-item">
+      <mat-list-item
+        *ngFor="let category of categories"
+        class="cat-list-item"
+        (click)="onSelectCategory(category.id!)"
+      >
         {{ category.name }}
       </mat-list-item>
     </mat-list>

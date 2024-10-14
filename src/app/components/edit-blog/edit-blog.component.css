@@ -1,0 +1,29 @@
+.edit-blog-container {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 20px;
+}
+
+.edit-blog-form {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 20px;
+}
+
+.edit-blog-form p {
+  width: 80%;
+}
+
+.edit-blog-form mat-form-field {
+  width: 100%;
+}
+
+.edit-blog-form textarea {
+  height: 100px;
+}

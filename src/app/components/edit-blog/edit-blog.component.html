@@ -1,0 +1,59 @@
+<div class="edit-blog-container">
+  <h2>Edit Blog</h2>
+  <form [formGroup]="blogForm" (ngSubmit)="onSubmit()" class="edit-blog-form">
+    <p>
+      <mat-form-field appearance="fill">
+        <mat-label>Title</mat-label>
+        <input matInput formControlName="title" required />
+        <mat-error *ngIf="blogForm.get('title')?.hasError('required')">
+          Title is required
+        </mat-error>
+      </mat-form-field>
+    </p>
+
+    <p>
+      <mat-form-field appearance="fill">
+        <mat-label>Content</mat-label>
+        <textarea matInput formControlName="content" required></textarea>
+        <mat-error *ngIf="blogForm.get('content')?.hasError('required')">
+          Content is required
+        </mat-error>
+      </mat-form-field>
+    </p>
+
+    <p>
+      <mat-form-field appearance="fill">
+        <mat-label>Image URL</mat-label>
+        <input matInput formControlName="imageUrl" />
+      </mat-form-field>
+    </p>
+
+    <p>
+      <mat-form-field appearance="fill">
+        <mat-label>Category</mat-label>
+        <mat-select formControlName="category" required>
+          <mat-option *ngFor="let category of categories" [value]="category.id">
+            {{ category.name }}
+          </mat-option>
+        </mat-select>
+        <mat-error *ngIf="blogForm.get('category')?.hasError('required')">
+          Category is required
+        </mat-error>
+      </mat-form-field>
+    </p>
+    <div mat-dialog-actions class="actions">
+      <button mat-raised-button type="button" [mat-dialog-close]="true">
+        Cancel
+      </button>
+
+      <button
+        mat-raised-button
+        color="primary"
+        type="submit"
+        [disabled]="blogForm.invalid"
+      >
+        Update
+      </button>
+    </div>
+  </form>
+</div>

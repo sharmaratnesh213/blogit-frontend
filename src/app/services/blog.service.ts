@@ -1,4 +1,4 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { Blog } from '../models/blog';
@@ -45,7 +45,12 @@ export class BlogService {
   }
 
   deleteBlog(id: number): Observable<any> {
-    return this.http.delete<any>(`${this.apiUrl}/${id}/delete`);
+    return this.http.delete<any>(`${this.apiUrl}/${id}/delete`, {responseType: 'text' as 'json'});
+  }
+
+  searchBlogs(keyword: string): Observable<Blog[]> {
+    const params = new HttpParams().set('query', keyword);
+    return this.http.get<Blog[]>(`${this.apiUrl}/search`, { params });
   }
 
 }

@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Category } from '../../models/category';
 import { CategoryService } from '../../services/category.service';
 import { FormBuilder, FormGroup } from '@angular/forms';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-sidebar',
@@ -13,7 +14,11 @@ export class SidebarComponent implements OnInit {
   searchForm!: FormGroup;
   categories: Category[] = [];
 
-  constructor(private categoryService: CategoryService, private fb: FormBuilder) { }
+  constructor(
+    private categoryService: CategoryService,
+     private fb: FormBuilder,
+     private router: Router
+    ) { }
 
   ngOnInit(): void {
     this.initiateForm();
@@ -34,9 +39,12 @@ export class SidebarComponent implements OnInit {
 
   onSearch(): void {
     const searchTerm = this.searchForm.value.searchTerm;
-    console.log(searchTerm);
+    this.router.navigate([], { queryParams: { search: searchTerm } });
     
   }
 
+  onSelectCategory(categoryId: number): void {
+    this.router.navigate([], { queryParams: { categoryId } });
+  }
 
 }

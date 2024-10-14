@@ -10,6 +10,10 @@
   border-radius: 8px;
 }
 
+.blog-info {
+  position: relative;
+}
+
 h1 {
   font-size: 2rem;
   margin-bottom: 10px;
@@ -22,9 +26,17 @@ h1 {
 }
 
 .action-buttons {
-  margin: 20px 0;
+  position: absolute;
+  right: 0;
+  top: 30px;
 }
 
-button {
-  margin-right: 10px;
+.action-buttons button mat-icon {
+  font-size: 2rem;
+  width: max-content;
+  height: max-content;
+}
+
+.not-liked mat-icon {
+  color: gray;
 }

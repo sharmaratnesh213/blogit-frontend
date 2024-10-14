@@ -5,6 +5,7 @@
   align-items: center;
   flex-wrap: wrap;
   gap: 60px;
+  padding-bottom: 30px;
 }
 
 .blog-card {

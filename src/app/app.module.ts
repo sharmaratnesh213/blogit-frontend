@@ -28,6 +28,9 @@ import { MatTabsModule } from '@angular/material/tabs';
 import { PostBlogComponent } from './pages/post-blog/post-blog.component';
 import { MatOptionModule } from '@angular/material/core';
 import { MatSelectModule } from '@angular/material/select';
+import { RegisterComponent } from './pages/register/register.component';
+import { EditBlogComponent } from './components/edit-blog/edit-blog.component';
+import { MatDialogModule } from '@angular/material/dialog';
 
 @NgModule({
   declarations: [
@@ -42,6 +45,8 @@ import { MatSelectModule } from '@angular/material/select';
     BlogDetailComponent,
     ProfileComponent,
     PostBlogComponent,
+    RegisterComponent,
+    EditBlogComponent,
   ],
   imports: [
     BrowserModule,
@@ -59,6 +64,7 @@ import { MatSelectModule } from '@angular/material/select';
     MatTabsModule,
     MatOptionModule,
     MatSelectModule,
+    MatDialogModule,
   ],
   providers: [
     provideAnimationsAsync(),
