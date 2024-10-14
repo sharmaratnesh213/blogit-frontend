@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Blog } from '../../models/blog';
 import { BlogService } from '../../services/blog.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-blog-list',
@@ -11,7 +12,7 @@ export class BlogListComponent implements OnInit {
 
   blogs: Blog[] = [];
 
-  constructor(private blogService: BlogService) { }
+  constructor(private blogService: BlogService, private router: Router) { }
 
   ngOnInit(): void {
     this.blogService.getAllBlogs().subscribe((data: Blog[]) => {
@@ -20,7 +21,7 @@ export class BlogListComponent implements OnInit {
   }
 
   navigateToDetail(blogId?: number): void {
-    console.log(blogId);
+    this.router.navigate(['/blogs', blogId]);
   }
 
 }

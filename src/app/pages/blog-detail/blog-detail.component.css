@@ -1,0 +1,30 @@
+.blog-detail-container {
+  padding: 20px;
+  max-width: 800px;
+  margin: auto;
+}
+
+.blog-image {
+  width: 100%;
+  height: auto;
+  border-radius: 8px;
+}
+
+h1 {
+  font-size: 2rem;
+  margin-bottom: 10px;
+}
+
+.author,
+.date {
+  font-size: 1rem;
+  color: gray;
+}
+
+.action-buttons {
+  margin: 20px 0;
+}
+
+button {
+  margin-right: 10px;
+}

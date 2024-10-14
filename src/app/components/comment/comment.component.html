@@ -1,15 +1,40 @@
-<div>
-  <h3>Comments</h3>
+<div class="comment-container">
+  <h2>Comments</h2>
 
   <form [formGroup]="commentForm" (ngSubmit)="onSubmit()">
-    <mat-form-field appearance="fill">
-      <mat-label>Comment</mat-label>
-      <textarea matInput formControlName="content"></textarea>
-    </mat-form-field>
+    <p class="commentField">
+      <mat-form-field appearance="fill">
+        <mat-label>Comment</mat-label>
+        <textarea matInput formControlName="content"></textarea>
+      </mat-form-field>
+    </p>
     <button mat-raised-button color="primary" type="submit">Add Comment</button>
   </form>
 
-  <div *ngFor="let comment of comments">
-    <p>{{ comment.content }}</p>
+  <div class="comments-section">
+    <mat-card *ngFor="let comment of comments" class="comment-card">
+      <mat-card-header>
+        <div class="avatar-container">
+          <img
+            *ngIf="comment.user?.imageUrl; else placeholder"
+            [src]="comment.user?.imageUrl"
+            alt="{{ comment.user?.username }}"
+            class="user-avatar"
+          />
+          <ng-template #placeholder>
+            <mat-icon class="default-avatar">person</mat-icon>
+            <!-- Placeholder icon if no image -->
+          </ng-template>
+        </div>
+        <mat-card-title>{{ comment.user?.username }}</mat-card-title>
+        <mat-card-subtitle>{{
+          comment.creationDateTime | date : "medium"
+        }}</mat-card-subtitle>
+      </mat-card-header>
+      <mat-divider></mat-divider>
+      <mat-card-content>
+        <p>{{ comment.content }}</p>
+      </mat-card-content>
+    </mat-card>
   </div>
 </div>

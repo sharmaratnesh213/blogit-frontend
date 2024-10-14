@@ -49,9 +49,25 @@ export class AuthService {
     return userJson ? JSON.parse(userJson) : null;
   }
 
-  isAuthenticated(): boolean {
+  isAuthenticated(): Observable<boolean> {
     const token = localStorage.getItem('jwtToken');
-    return !!token;
+    if (!token) {
+      return of(false); 
+    }
+
+    return this.verifyToken().pipe(
+      map(isValid => {
+        if (!isValid) {
+          this.logout();
+          return false;
+        }
+        return true;
+      }),
+      catchError(() => {
+        this.logout();
+        return of(false);
+      })
+    );
   }
   
 }
