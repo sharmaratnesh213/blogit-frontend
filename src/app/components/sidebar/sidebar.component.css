@@ -1,0 +1,60 @@
+.sidebar-container {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 40px;
+  padding: 20px;
+  box-sizing: border-box;
+}
+
+.blog-search {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.search-form {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 0;
+}
+
+.search-form p {
+  width: 80%;
+}
+
+.mat-search-input {
+  width: 100%;
+}
+
+.categories {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0;
+}
+
+h1 {
+  margin: 10px;
+}
+
+p {
+  margin: 10px;
+}
+
+.cat-list {
+  width: 100%;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 30px;
+}
+
+.cat-list-item {
+  width: max-content;
+}

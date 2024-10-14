@@ -57,14 +57,14 @@ export class AuthService {
 
     return this.verifyToken().pipe(
       map(isValid => {
+        console.log("Valid", isValid);
+        
         if (!isValid) {
-          this.logout();
           return false;
         }
         return true;
       }),
       catchError(() => {
-        this.logout();
         return of(false);
       })
     );

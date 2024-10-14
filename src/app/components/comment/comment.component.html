@@ -3,7 +3,7 @@
 
   <form [formGroup]="commentForm" (ngSubmit)="onSubmit()">
     <p class="commentField">
-      <mat-form-field appearance="fill">
+      <mat-form-field appearance="fill" class="mat-comment">
         <mat-label>Comment</mat-label>
         <textarea matInput formControlName="content"></textarea>
       </mat-form-field>
@@ -13,7 +13,7 @@
 
   <div class="comments-section">
     <mat-card *ngFor="let comment of comments" class="comment-card">
-      <mat-card-header>
+      <mat-card-header class="comment-card-header">
         <div class="avatar-container">
           <img
             *ngIf="comment.user?.imageUrl; else placeholder"
@@ -26,10 +26,12 @@
             <!-- Placeholder icon if no image -->
           </ng-template>
         </div>
-        <mat-card-title>{{ comment.user?.username }}</mat-card-title>
-        <mat-card-subtitle>{{
-          comment.creationDateTime | date : "medium"
-        }}</mat-card-subtitle>
+        <p>
+          <mat-card-title>{{ comment.user?.username }}</mat-card-title>
+          <mat-card-subtitle>{{
+            comment.creationDateTime | date : "medium"
+          }}</mat-card-subtitle>
+        </p>
       </mat-card-header>
       <mat-divider></mat-divider>
       <mat-card-content>

@@ -3,17 +3,30 @@
   <span class="spacer"></span>
 
   <button mat-button routerLink="/">Home</button>
-  <button mat-button routerLink="/blogs">Blogs</button>
+  <button mat-button routerLink="/blog/create">Write</button>
   <button mat-button routerLink="/about">About</button>
   <button mat-button routerLink="/contact">Contact</button>
 
   <span class="spacer"></span>
 
-  <button mat-icon-button aria-label="User Account" [matMenuTriggerFor]="menu">
-    <mat-icon>account_circle</mat-icon>
-  </button>
-  <mat-menu #menu="matMenu">
-    <button mat-menu-item routerLink="/profile">Profile</button>
-    <!-- <button mat-menu-item (click)="logout()">Logout</button> -->
-  </mat-menu>
+  <ng-container *ngIf="isLoggedIn; else guestOptions">
+    <button
+      mat-icon-button
+      aria-label="User Account"
+      [matMenuTriggerFor]="menu"
+    >
+      <mat-icon>account_circle</mat-icon>
+    </button>
+    <mat-menu #menu="matMenu">
+      <button mat-menu-item [routerLink]="'/profile/' + user?.id">
+        Profile
+      </button>
+      <button mat-menu-item (click)="logout()">Logout</button>
+    </mat-menu>
+  </ng-container>
+
+  <ng-template #guestOptions>
+    <button mat-button routerLink="/login">Login</button>
+    <button mat-button routerLink="/signup">Signup</button>
+  </ng-template>
 </mat-toolbar>

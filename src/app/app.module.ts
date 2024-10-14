@@ -23,6 +23,11 @@ import { SidebarComponent } from './components/sidebar/sidebar.component';
 import { MatListModule } from '@angular/material/list';
 import { MatCardModule } from '@angular/material/card';
 import { BlogDetailComponent } from './pages/blog-detail/blog-detail.component';
+import { ProfileComponent } from './pages/profile/profile.component';
+import { MatTabsModule } from '@angular/material/tabs';
+import { PostBlogComponent } from './pages/post-blog/post-blog.component';
+import { MatOptionModule } from '@angular/material/core';
+import { MatSelectModule } from '@angular/material/select';
 
 @NgModule({
   declarations: [
@@ -35,6 +40,8 @@ import { BlogDetailComponent } from './pages/blog-detail/blog-detail.component';
     LoginComponent,
     SidebarComponent,
     BlogDetailComponent,
+    ProfileComponent,
+    PostBlogComponent,
   ],
   imports: [
     BrowserModule,
@@ -49,6 +56,9 @@ import { BlogDetailComponent } from './pages/blog-detail/blog-detail.component';
     MatMenuModule,
     MatListModule,
     MatCardModule,
+    MatTabsModule,
+    MatOptionModule,
+    MatSelectModule,
   ],
   providers: [
     provideAnimationsAsync(),

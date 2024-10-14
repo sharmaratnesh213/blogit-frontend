@@ -1,0 +1,80 @@
+<app-navbar></app-navbar>
+<div class="profile-container">
+  <mat-card class="profile-card">
+    <mat-card-header>
+      <img
+        mat-card-avatar
+        *ngIf="user?.imageUrl; else noAvatar"
+        [src]="user?.imageUrl"
+        alt="User Avatar"
+      />
+      <ng-template #noAvatar>
+        <mat-icon>person</mat-icon>
+      </ng-template>
+      <mat-card-title>{{ user?.username }}</mat-card-title>
+      <mat-card-subtitle>{{ user?.role | titlecase }}</mat-card-subtitle>
+    </mat-card-header>
+
+    <mat-card-content>
+      <p><strong>Email:</strong> {{ user?.email }}</p>
+      <p><strong>Role:</strong> {{ user?.role }}</p>
+      <p *ngIf="user?.dob">
+        <strong>Date of Birth:</strong> {{ user?.dob | date }}
+      </p>
+    </mat-card-content>
+
+    <mat-card-actions>
+      <button mat-raised-button color="primary" (click)="editProfile()">
+        Edit Profile
+      </button>
+    </mat-card-actions>
+  </mat-card>
+
+  <mat-tab-group class="profile-tab-group">
+    <mat-tab label="My Blogs">
+      <div class="blog-list-container">
+        <div *ngFor="let blog of userBlogs" class="blog-card">
+          <mat-card
+            [routerLink]="['/blogs', blog.id]"
+            class="blog-card-content"
+          >
+            <img mat-card-image [src]="blog.imageUrl" alt="{{ blog.title }}" />
+            <mat-card-header>
+              <mat-card-title>{{ blog.title }}</mat-card-title>
+              <mat-card-subtitle>{{ blog.user?.username }}</mat-card-subtitle>
+              <mat-card-subtitle>{{
+                blog.creationDateTime | date
+              }}</mat-card-subtitle>
+            </mat-card-header>
+            <mat-card-content>
+              <p>{{ blog.content | slice : 0 : 100 }}...</p>
+            </mat-card-content>
+          </mat-card>
+        </div>
+      </div>
+    </mat-tab>
+
+    <mat-tab label="Liked Blogs">
+      <div class="blog-list-container">
+        <div *ngFor="let blog of likedBlogs" class="blog-card">
+          <mat-card
+            [routerLink]="['/blogs', blog.id]"
+            class="blog-card-content"
+          >
+            <img mat-card-image [src]="blog.imageUrl" alt="{{ blog.title }}" />
+            <mat-card-header>
+              <mat-card-title>{{ blog.title }}</mat-card-title>
+              <mat-card-subtitle>{{ blog.user?.username }}</mat-card-subtitle>
+              <mat-card-subtitle>{{
+                blog.creationDateTime | date
+              }}</mat-card-subtitle>
+            </mat-card-header>
+            <mat-card-content>
+              <p>{{ blog.content | slice : 0 : 100 }}...</p>
+            </mat-card-content>
+          </mat-card>
+        </div>
+      </div>
+    </mat-tab>
+  </mat-tab-group>
+</div>

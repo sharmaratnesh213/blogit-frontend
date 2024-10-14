@@ -7,7 +7,7 @@
   width: 100%;
 }
 
-mat-form-field {
+.mat-comment {
   width: 100%;
 }
 
@@ -29,4 +29,13 @@ mat-form-field {
   width: 50px;
   height: 50px;
   border-radius: 50%;
+}
+
+.comments-section {
+  margin-top: 20px;
+}
+
+.comment-card-header {
+  display: flex;
+  gap: 20px;
 }
