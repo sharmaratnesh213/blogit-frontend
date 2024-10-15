@@ -60,6 +60,9 @@ export class CommentComponent implements OnInit {
     this.commentService.addComment(newComment).subscribe((comment) => {
       this.comments.push(comment);
       this.commentForm.reset();
+      this.commentForm.controls['content'].setErrors(null);
+      this.commentForm.markAsPristine();
+      this.commentForm.markAsUntouched();
     });
   }
 
